@@ -27,7 +27,7 @@ def chat():
         entities = [s for s in entities_list if(s in user_message)] 
 
         intent = response.get("intent")
-        print("Intent {}, Entities {}".format(intent['name'],entities))
+        print(f"Intent {intent['name']}, Entities {entities}")
         if intent['name'] == "info_search":
             response_text = info_search(entities)
         elif intent['name'] == "complaint":
@@ -45,7 +45,7 @@ def chat():
         else:
             response_text = "Sorry, can not help at this time"
         return jsonify({"status":"success","response":response_text})
-        #return 'OK'
+            #return 'OK'
     except Exception as e:
         print(e)
         return jsonify({"status":"success","response":"Sorry I am not trained to do that yet..."})

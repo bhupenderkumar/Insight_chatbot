@@ -25,7 +25,7 @@ class ActionOrderProduct(Action):
 		router = tracker.get_slot('router')
 		confirmationNumber = 123456 #later generate through some process
 
-		response = """Your product {} is ordered for you. It will be shipped to your address. Your confirmation number is {}""".format(router, confirmationNumber)
+		response = f"""Your product {router} is ordered for you. It will be shipped to your address. Your confirmation number is {confirmationNumber}"""
 
 		dispatcher.utter_message(response)
 		return [SlotSet('router',router)]
