@@ -34,7 +34,7 @@ def chat():
         if(length>0):
             entity = entities[0]["entity"]
             value = entities[0]["value"]  
-        
+
 
         if intent == "info_search":
             response_text = """
@@ -47,18 +47,18 @@ def chat():
             F) Delay by Employee Provident Fund (EPF) in approving members' applications to withdraw contribution money with purpose of purchasing new houses, financing child education and also because of the permanent disabilities.
             G) Delay by EPF and SOCSO in taking any necessary action against employers who failed to contribute to EPF/SOCSO even though the deduction have been made from workers salary.
              """
-        
+
         if intent == "event-request":
             response_text = get_event(entities["day"],entities["time"],entities["place"])
         elif isClosingCard == True:
            if response["text"] == "1234":
                response_text = "We are closing this card. Thanks for your patience."
                isClosingCard = False
-            
+
            elif response["text"] == "ok":
                response_text = "How else I can help you? :)"
                isClosingCard = False
-            
+
            else:
                response_text = "This card doesn't exist. Please check the number again. If you want to talk about anything else rather than this #then type ok"
         elif intent == "lost_card":
@@ -73,7 +73,7 @@ def chat():
                     response_text = "For credit cards we charge 500 taka per year"
                 else:
                     response_text = "I am not sure about that, sorry!"
-                
+
             else:
                 response_text = "For credit cards we charge 500 tk per year. And for debit cards first year is free and from second year we charge 300tk per year"
 
@@ -84,8 +84,14 @@ def chat():
         elif intent == "loan_home":
             response_text = "We provide home loan of minimum 20 lacs tk and maximum 1.2 crore tk"
         elif intent == "loan_max":
-            if(length>0 and entity == "loan"):
-                if (value.lower() =="medical" or value.lower() == "personal" or value.lower() == "marriage" or value.lower() == "traveling" or value.lower() == "education"):
+            if (length>0 and entity == "loan"):
+                if value.lower() in [
+                    "medical",
+                    "personal",
+                    "marriage",
+                    "traveling",
+                    "education",
+                ]:
                     response_text = "We provide personal loan of maximum 2 lacs tk"
                 elif value.lower() == "car":
                     response_text = "We provide car loan of maximum of 20 lacs tk"
@@ -93,8 +99,14 @@ def chat():
                     response_text = "We provide home loan of maximum 1.2 crore tk"
 
         elif intent == "loan_min":
-            if(length>0 and entity == "loan"):
-                if (value.lower() =="medical" or value.lower() == "personal" or value.lower() == "marriage" or value.lower() == "traveling" or value.lower() == "education"):
+            if (length>0 and entity == "loan"):
+                if value.lower() in [
+                    "medical",
+                    "personal",
+                    "marriage",
+                    "traveling",
+                    "education",
+                ]:
                     response_text = "We provide minimum personal loan of 50,000 tk lacs tk"
                 elif value.lower() == "car":
                     response_text = "We provide car loan of minimum of 5 lacs tk"
@@ -103,10 +115,10 @@ def chat():
         elif intent == "loan_max_home":
              response_text = "We provide home loan of maximum 1.2 crore tk"
 
-                        
+
         elif intent == "loan_details":
             response_text = "We provide 3 different kinds of loans currently.\n1.Personal loan(Marriage, traveling, education etc)\n2.Car loan\n3.Home loan"
-        
+
         elif intent == "show_balance":
             response_text = "Your current account balance is 20,000 tk"
 

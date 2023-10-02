@@ -27,10 +27,13 @@ def try_parsing_date(text):
             return datetime.datetime.strptime(text, fmt)
         except ValueError:pass
     if ":" in text:
-        return datetime.datetime.strptime(text+" "+
-                ("AM" if int(text.split(":")[0])>=8 else "PM"), '%I:%M %p')
-    return datetime.datetime.strptime(text+" "+
-            ("AM" if int(text)>=8 else "PM"), '%I %p')
+        return datetime.datetime.strptime(
+            (f"{text} " + ("AM" if int(text.split(":")[0]) >= 8 else "PM")),
+            '%I:%M %p',
+        )
+    return datetime.datetime.strptime(
+        (f"{text} " + ("AM" if int(text) >= 8 else "PM")), '%I %p'
+    )
 
 def get_date_time(day,time):
     """
@@ -38,10 +41,7 @@ def get_date_time(day,time):
     """
     try:time = mapping[time]
     except KeyError:
-        if not time:
-            time = datetime.datetime.now()
-        else:
-            time = try_parsing_date(time)
+        time = datetime.datetime.now() if not time else try_parsing_date(time)
     try:date = mapping[day]
     except KeyError:date = datetime.date.today()
 

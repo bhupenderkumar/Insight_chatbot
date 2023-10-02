@@ -14,8 +14,7 @@ def train_nlu(data, configuration, model_dir):
 	training_data = load_data(data)
 	trainer = Trainer(config.load(configuration))
 	trainer.train(training_data)
-	model_directory = trainer.persist(model_dir, fixed_model_name = 'customernlu')
-	return model_directory
+	return trainer.persist(model_dir, fixed_model_name = 'customernlu')
 
 def run_nlu(model_directory):
 	#interpreter = Interpreter.load('./models/nlu/default/customernlu', RasaNLUModelConfig('config_spacy.yml'))
